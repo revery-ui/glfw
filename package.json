@@ -1,0 +1,27 @@
+{
+  "name": "esy-glfw",
+  "version": "3.2.1008",
+  "description": "Esy GLFW build",
+  "license": "MIT",
+  "esy": {
+    "build": [
+        ["echo Target: `cygpath -p #{self.target_dir}`"],
+        ["cmake", "-DCMAKE_INSTALL_PREFIX=`cygpath -p #{self.target_dir}`", "-DGLFW_BUILD_EXAMPLES=NO", "-DGLFW_BUILD_TESTS=NO", "-DGLFW_BUILD_DOCS=NO", "-DCMAKE_C_COMPILER=/usr/bin/x86_64-w64-mingw32-gcc", "-DCMAKE_C_LINK_EXECUTABLE=/usr/bin/x86_64-w64-mingw32-ld", "-DCMAKE_RC_COMPILER=/usr/bin/x86_64-w64-mingw32-windres.exe ", "-DUNIX=NO", "-DWIN32=YES", "."],
+        ["make", "install"]
+    ],
+    "buildsInSource":"_build",
+    "exportedEnv": {
+        "GLFW_INCLUDE_PATH": {
+            "val": "#{self.install / 'include'}",
+            "scope": "global"
+        },
+        "GLFW_LIB_PATH": {
+            "val": "#{self.lib}",
+            "scope": "global"
+        }
+    }
+  },
+  "dependencies": {
+    "esy-cmake": "^0.3.2"
+  }
+}
